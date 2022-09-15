@@ -1,28 +1,31 @@
-﻿namespace Scp008
+﻿using System;
+
+namespace Scp008
 {
-    using System;
-    using Exiled.API.Features;
-
-    /// <inheritdoc/>
-    public class Scp008 : Plugin<Config>
+    public sealed class Scp008 : Exiled.API.Features.Plugin<Config>
     {
-        /// <inheritdoc/>
-        public override Version RequiredExiledVersion => new Version(5, 3, 0);
+        public override string Name => "SCP-008";
 
-        /// <inheritdoc/>
+        public override string Prefix => "scp_008";
+
+        public override string Author => "Exmetria IT (AlexanderK and rd)";
+
+        public override Version Version => new (1, 0, 0);
+
+        public override Version RequiredExiledVersion => new (5, 3, 0);
+
         public override void OnEnabled()
         {
-
-
             base.OnEnabled();
         }
 
-        /// <inheritdoc/>
         public override void OnDisabled()
         {
-
-
             base.OnDisabled();
         }
+
+        public override void OnRegisteringCommands() { }
+
+        public override void OnUnregisteringCommands() { }
     }
 }

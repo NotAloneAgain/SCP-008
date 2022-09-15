@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="Events\PlayerHandler.cs" />
+    <Compile Include="Handlers\PlayerHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scp008.cs" />
   </ItemGroup>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scp008.Events
 {
-    public class PlayerHandler
+    internal sealed class PlayerHandlers
     {
     }
 }
