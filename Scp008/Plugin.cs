@@ -2,7 +2,7 @@
 
 namespace Scp008
 {
-    public sealed class Scp008 : Exiled.API.Features.Plugin<Config>
+    public sealed class Plugin : Exiled.API.Features.Plugin<Config>
     {
         public override string Name => "SCP-008";
 
@@ -10,9 +10,9 @@ namespace Scp008
 
         public override string Author => "Exmetria IT (AlexanderK and rd)";
 
-        public override Version Version => new (1, 0, 0);
+        public override Version Version { get; } = new (1, 0, 0);
 
-        public override Version RequiredExiledVersion => new (5, 3, 0);
+        public override Version RequiredExiledVersion { get; } = new (5, 3, 0);
 
         public override void OnEnabled()
         {
