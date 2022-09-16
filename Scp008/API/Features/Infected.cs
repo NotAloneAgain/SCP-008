@@ -10,7 +10,7 @@ namespace Scp008.API
         private Timer _timer;
         private ReferenceHub _referenceHub;
 
-        internal void Init(float time)
+        public void Init(float time)
         {
             _referenceHub = GetComponent<ReferenceHub>();
             _timer = gameObject.AddComponent<Timer>();
@@ -19,7 +19,7 @@ namespace Scp008.API
             _timer.Init(time);
         }
 
-        internal void Reset()
+        public void Reset()
         {
             _referenceHub = null;
             _timer.Finished -= OnTimerFinished;
@@ -33,6 +33,7 @@ namespace Scp008.API
 
             player.SessionVariables.Remove("infected");
             CustomRole.Get(8).AddRole(player);
+
             Destroy(_timer);
             Destroy(this);
         }

@@ -9,24 +9,19 @@ namespace Scp008
 {
     internal static class Extensions
     {
-        public static IEnumerable<Player> GetPlayersInRadius(Vector3 position, float radius)
-        {
-            return Player.Get(player => Vector3.Distance(player.Position, position) <= radius);
-        }
+        public static IEnumerable<Player> GetPlayersInRadius(Vector3 position, float radius) => Player.Get(player => Vector3.Distance(player.Position, position) <= radius);
 
-        public static bool IsScp049InRadius(Vector3 position, float radius)
-        {
-            return GetPlayersInRadius(position, radius).Count(player => player.Role == RoleType.Scp049) > 0;
-        }
+        public static bool IsScp049InRadius(Vector3 position, float radius) => GetPlayersInRadius(position, radius).Count(player => player.Role == RoleType.Scp049) > 0;
 
-        public static float DistanceToScp049(Vector3 position)
-        {
-            return Player.Get(RoleType.Scp049).Select(player => Vector3.Distance(player.Position, position)).OrderBy(distance => distance).First();
-        }
+        public static float DistanceToScp049(Vector3 position) => Player.Get(RoleType.Scp049).Select(player => Vector3.Distance(player.Position, position)).OrderBy(distance => distance).First();
 
         public static void InfectPlayer(Player player, float time)
         {
-            if (player.SessionVariables.ContainsKey("infected") || player.IsScp) return;
+            if (player.SessionVariables.ContainsKey("infected") || player.IsScp)
+            {
+                return;
+            }
+
             var ahpStat = player.ReferenceHub.playerStats.GetModule<AhpStat>();
             var infected = player.GameObject.AddComponent<Infected>();
 
