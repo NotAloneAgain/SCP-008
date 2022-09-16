@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scp008.Handlers;
+using System;
 
 namespace Scp008
 {
@@ -16,11 +17,15 @@ namespace Scp008
 
         public override void OnEnabled()
         {
+            PlayerHandler.RegisterEvents();
+
             base.OnEnabled();
         }
 
         public override void OnDisabled()
         {
+            PlayerHandler.UnregisterEvents();
+
             base.OnDisabled();
         }
 
