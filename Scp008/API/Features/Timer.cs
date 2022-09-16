@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+﻿using Exiled.Events.Extensions;
+using UnityEngine;
 using static Exiled.Events.Events;
 
 namespace Scp008.API
 {
-    internal sealed class Timer : MonoBehaviour
+    public sealed class Timer : MonoBehaviour
     {
-        internal event CustomEventHandler Finished;
-
         private float _time;
         private bool _isFinished;
         private bool _isStarted;
+
+        public event CustomEventHandler Finished;
+
+        public bool InProgress => !_isFinished && _isStarted;
 
         public void Init(float time)
         {
@@ -19,13 +22,17 @@ namespace Scp008.API
 
         private void FixedUpdate()
         {
-            if (_isFinished || !_isStarted) return;
+            if (InProgress)
+            {
+                return;
+            }
+
             _time -= Time.fixedDeltaTime;
 
-            if (_time <= 0)
+            if (Mathf.RoundToInt(_time) <= 0)
             {
                 _isFinished = true;
-                Finished?.Invoke();
+                Finished.InvokeSafely();
             }
         }
     }

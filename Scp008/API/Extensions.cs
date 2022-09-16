@@ -4,6 +4,7 @@ using Scp008.API;
 using System.Collections.Generic;
 using System.Linq;
 using PlayerStatsSystem;
+using Exiled.CustomRoles.API.Features;
 
 namespace Scp008
 {
@@ -13,11 +14,16 @@ namespace Scp008
 
         public static bool IsScp049InRadius(Vector3 position, float radius) => GetPlayersInRadius(position, radius).Count(player => player.Role == RoleType.Scp049) > 0;
 
-        public static float DistanceToScp049(Vector3 position) => Player.Get(RoleType.Scp049).Select(player => Vector3.Distance(player.Position, position)).OrderBy(distance => distance).First();
+        public static float DistanceToScp049(Vector3 position) => Player.Get(RoleType.Scp049).Select(player => Vector3.Distance(player.Position, position)).OrderBy(distance => distance).First() + 1;
 
         public static void InfectPlayer(Player player, float time)
         {
-            if (player.SessionVariables.ContainsKey("infected") || player.IsScp)
+            if (player.IsScp || CustomRole.TryGet(35, out var scp035) && scp035.Check(player))
+            {
+                return;
+            }
+
+            if (player.SessionVariables.ContainsKey("Infected"))
             {
                 return;
             }
@@ -28,7 +34,7 @@ namespace Scp008
             ahpStat.KillAllProcess();
             ahpStat.ServerAddProcess(0, 75, 1.2f, 0.7f, 0, false);
             infected.Init(time);
-            player.SessionVariables.Add("infected", true);
+            player.SessionVariables.Add("Infected", true);
         }
 
         public static void CancelInfection(Player player)
@@ -40,7 +46,7 @@ namespace Scp008
             }
 
             player.ReferenceHub.playerStats.GetModule<AhpStat>().KillAllProcess();
-            player.SessionVariables.Remove("infected");
+            player.SessionVariables.Remove("Infected");
         }
 
         private static void KillAllProcess(this AhpStat ahpStat)

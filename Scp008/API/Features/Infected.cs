@@ -31,7 +31,7 @@ namespace Scp008.API
         {
             var player = Player.Get(_referenceHub);
 
-            player.SessionVariables.Remove("infected");
+            player.SessionVariables.Remove("Infected");
             CustomRole.Get(8).AddRole(player);
 
             Destroy(_timer);

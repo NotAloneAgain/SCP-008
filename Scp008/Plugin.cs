@@ -1,5 +1,5 @@
-﻿using Scp008.Handlers;
-using System;
+﻿using System;
+using Exiled.CustomRoles.API;
 
 namespace Scp008
 {
@@ -9,7 +9,7 @@ namespace Scp008
 
         public override string Prefix => "scp_008";
 
-        public override string Author => "Exmetria IT (AlexanderK and rd)";
+        public override string Author => "Exmetria IT (AlexanderK and rd( TIR? ))";
 
         public override Version Version { get; } = new (1, 0, 0);
 
@@ -17,14 +17,14 @@ namespace Scp008
 
         public override void OnEnabled()
         {
-            PlayerHandler.RegisterEvents();
+            Config.Role.Register();
 
             base.OnEnabled();
         }
 
         public override void OnDisabled()
         {
-            PlayerHandler.UnregisterEvents();
+            Config.Role.Register();
 
             base.OnDisabled();
         }
