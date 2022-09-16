@@ -11,7 +11,7 @@ namespace Scp008.API
         private bool _isFinished;
         private bool _isStarted;
 
-        internal void Init(float time)
+        public void Init(float time)
         {
             _time = time;
             _isStarted = true;
